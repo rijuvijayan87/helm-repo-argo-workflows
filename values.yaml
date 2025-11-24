@@ -1011,6 +1011,6 @@ tests:
   nodeApi:
     enabled: false
     image:
-      repository: "node-api"
-      tag: "latest"
+      repository: rijuvijayan/node-api-container
+      tag: v0.1.5
     command: ["npm", "test"]
