@@ -505,157 +505,157 @@ executor:
   # -- sets security context for the executor container
   securityContext: {}
 
-  server:
-    # -- Deploy the Argo Server
-    enabled: true
-    # -- Value for base href in index.html. Used if the server is running behind reverse proxy under subpath different from /.
-    ## only updates base url of resources on client side,
-    ## it's expected that a proxy server rewrites the request URL and gets rid of this prefix
-    ## https://github.com/argoproj/argo-workflows/issues/716#issuecomment-433213190
-    baseHref: /
-    image:
-      # -- Registry to use for the server
-      registry: quay.io
-      # -- Repository to use for the server
-      repository: argoproj/argocli
-      # -- Image tag for the Argo Workflows server. Defaults to `.Values.images.tag`.
-      tag: ""
-    # -- optional map of annotations to be applied to the ui Deployment
-    deploymentAnnotations: {}
-    # -- optional map of annotations to be applied to the ui Pods
-    podAnnotations: {}
-    # -- Optional labels to add to the UI pods
-    podLabels: {}
-    # -- SecurityContext to set on the server pods
-    podSecurityContext: {}
-    rbac:
-      # -- Adds Role and RoleBinding for the server.
-      create: true
-    # -- Servers container-level security context
-    securityContext:
-      readOnlyRootFilesystem: false
-      runAsNonRoot: true
-      allowPrivilegeEscalation: false
-      capabilities:
-        drop:
-          - ALL
-    # -- Server name string
-    name: server
-    serviceType: NodePort
-    # -- Service port for server
-    servicePort: 2746
-    # -- Service node port
-    serviceNodePort: # 32746
-    # -- Service port name
-    servicePortName: "" # http
+server:
+  # -- Deploy the Argo Server
+  enabled: true
+  # -- Value for base href in index.html. Used if the server is running behind reverse proxy under subpath different from /.
+  ## only updates base url of resources on client side,
+  ## it's expected that a proxy server rewrites the request URL and gets rid of this prefix
+  ## https://github.com/argoproj/argo-workflows/issues/716#issuecomment-433213190
+  baseHref: /
+  image:
+    # -- Registry to use for the server
+    registry: quay.io
+    # -- Repository to use for the server
+    repository: argoproj/argocli
+    # -- Image tag for the Argo Workflows server. Defaults to `.Values.images.tag`.
+    tag: ""
+  # -- optional map of annotations to be applied to the ui Deployment
+  deploymentAnnotations: {}
+  # -- optional map of annotations to be applied to the ui Pods
+  podAnnotations: {}
+  # -- Optional labels to add to the UI pods
+  podLabels: {}
+  # -- SecurityContext to set on the server pods
+  podSecurityContext: {}
+  rbac:
+    # -- Adds Role and RoleBinding for the server.
+    create: true
+  # -- Servers container-level security context
+  securityContext:
+    readOnlyRootFilesystem: false
+    runAsNonRoot: true
+    allowPrivilegeEscalation: false
+    capabilities:
+      drop:
+        - ALL
+  # -- Server name string
+  name: server
+  serviceType: NodePort
+  # -- Service port for server
+  servicePort: 2746
+  # -- Service node port
+  serviceNodePort: # 32746
+  # -- Service port name
+  servicePortName: "" # http
 
-    # -- Mapping between IP and hostnames that will be injected as entries in the pod's hosts files
-    hostAliases: []
-    # - ip: 10.20.30.40
-    #   hostnames:
-    #   - git.myhostname
+  # -- Mapping between IP and hostnames that will be injected as entries in the pod's hosts files
+  hostAliases: []
+  # - ip: 10.20.30.40
+  #   hostnames:
+  #   - git.myhostname
 
-    serviceAccount:
-      # -- Create a service account for the server
-      create: true
-      # -- Service account name
-      name: ""
-      # -- Labels applied to created service account
-      labels: {}
-      # -- Annotations applied to created service account
-      annotations: {}
+  serviceAccount:
+    # -- Create a service account for the server
+    create: true
+    # -- Service account name
+    name: ""
+    # -- Labels applied to created service account
+    labels: {}
+    # -- Annotations applied to created service account
+    annotations: {}
 
-    # -- Annotations to be applied to the UI Service
-    serviceAnnotations: {}
-    # -- Optional labels to add to the UI Service
-    serviceLabels: {}
-    # -- The class of the load balancer implementation
-    loadBalancerClass: ""
-    # -- Static IP address to assign to loadBalancer service type `LoadBalancer`
-    loadBalancerIP: ""
-    # -- Source ranges to allow access to service from. Only applies to service type `LoadBalancer`
-    loadBalancerSourceRanges: []
-    # -- Resource limits and requests for the server
-    resources: {}
-    # -- The number of server pods to run
-    replicas: 1
-    # -- The number of revisions to keep.
-    revisionHistoryLimit: 10
-    ## Argo Server Horizontal Pod Autoscaler
-    autoscaling:
-      # -- Enable Horizontal Pod Autoscaler ([HPA]) for the Argo Server
-      enabled: false
-      # -- Minimum number of replicas for the Argo Server [HPA]
-      minReplicas: 1
-      # -- Maximum number of replicas for the Argo Server [HPA]
-      maxReplicas: 5
-      # -- Average CPU utilization percentage for the Argo Server [HPA]
-      targetCPUUtilizationPercentage: 50
-      # -- Average memory utilization percentage for the Argo Server [HPA]
-      targetMemoryUtilizationPercentage: 50
-      # -- Configures the scaling behavior of the target in both Up and Down directions.
-      # This is only available on HPA apiVersion `autoscaling/v2beta2` and newer
-      behavior: {}
-        # scaleDown:
-        #  stabilizationWindowSeconds: 300
-        #  policies:
-        #   - type: Pods
-        #     value: 1
-        #     periodSeconds: 180
-        # scaleUp:
-        #   stabilizationWindowSeconds: 300
-        #   policies:
-        #   - type: Pods
-        #     value: 2
-    pdb:
-      # -- Configure [Pod Disruption Budget] for the server pods
-      enabled: false
-      # minAvailable: 1
-      # maxUnavailable: 1
+  # -- Annotations to be applied to the UI Service
+  serviceAnnotations: {}
+  # -- Optional labels to add to the UI Service
+  serviceLabels: {}
+  # -- The class of the load balancer implementation
+  loadBalancerClass: ""
+  # -- Static IP address to assign to loadBalancer service type `LoadBalancer`
+  loadBalancerIP: ""
+  # -- Source ranges to allow access to service from. Only applies to service type `LoadBalancer`
+  loadBalancerSourceRanges: []
+  # -- Resource limits and requests for the server
+  resources: {}
+  # -- The number of server pods to run
+  replicas: 1
+  # -- The number of revisions to keep.
+  revisionHistoryLimit: 10
+  ## Argo Server Horizontal Pod Autoscaler
+  autoscaling:
+    # -- Enable Horizontal Pod Autoscaler ([HPA]) for the Argo Server
+    enabled: false
+    # -- Minimum number of replicas for the Argo Server [HPA]
+    minReplicas: 1
+    # -- Maximum number of replicas for the Argo Server [HPA]
+    maxReplicas: 5
+    # -- Average CPU utilization percentage for the Argo Server [HPA]
+    targetCPUUtilizationPercentage: 50
+    # -- Average memory utilization percentage for the Argo Server [HPA]
+    targetMemoryUtilizationPercentage: 50
+    # -- Configures the scaling behavior of the target in both Up and Down directions.
+    # This is only available on HPA apiVersion `autoscaling/v2beta2` and newer
+    behavior: {}
+      # scaleDown:
+      #  stabilizationWindowSeconds: 300
+      #  policies:
+      #   - type: Pods
+      #     value: 1
+      #     periodSeconds: 180
+      # scaleUp:
+      #   stabilizationWindowSeconds: 300
+      #   policies:
+      #   - type: Pods
+      #     value: 2
+  pdb:
+    # -- Configure [Pod Disruption Budget] for the server pods
+    enabled: false
+    # minAvailable: 1
+    # maxUnavailable: 1
 
-    # -- [Node selector]
-    nodeSelector:
-      kubernetes.io/os: linux
+  # -- [Node selector]
+  nodeSelector:
+    kubernetes.io/os: linux
 
-    # -- [Tolerations] for use with node taints
-    tolerations: []
+  # -- [Tolerations] for use with node taints
+  tolerations: []
 
-    # -- Assign custom [affinity] rules
-    affinity: {}
+  # -- Assign custom [affinity] rules
+  affinity: {}
 
-    # -- Assign custom [TopologySpreadConstraints] rules to the argo server
-    ## Ref: https://kubernetes.io/docs/concepts/workloads/pods/pod-topology-spread-constraints/
-    ## If labelSelector is left out, it will default to the labelSelector configuration of the deployment
-    topologySpreadConstraints: []
-    # - maxSkew: 1
-    #   topologyKey: topology.kubernetes.io/zone
-    #   whenUnsatisfiable: DoNotSchedule
+  # -- Assign custom [TopologySpreadConstraints] rules to the argo server
+  ## Ref: https://kubernetes.io/docs/concepts/workloads/pods/pod-topology-spread-constraints/
+  ## If labelSelector is left out, it will default to the labelSelector configuration of the deployment
+  topologySpreadConstraints: []
+  # - maxSkew: 1
+  #   topologyKey: topology.kubernetes.io/zone
+  #   whenUnsatisfiable: DoNotSchedule
 
-    # -- Leverage a PriorityClass to ensure your pods survive resource shortages
-    ## ref: https://kubernetes.io/docs/concepts/configuration/pod-priority-preemption/
-    priorityClassName: ""
+  # -- Leverage a PriorityClass to ensure your pods survive resource shortages
+  ## ref: https://kubernetes.io/docs/concepts/configuration/pod-priority-preemption/
+  priorityClassName: ""
 
-    # -- Run the argo server in "secure" mode. Configure this value instead of `--secure` in extraArgs.
-    ## See the following documentation for more details on secure mode:
-    ## https://argo-workflows.readthedocs.io/en/stable/tls/
-    secure: false
+  # -- Run the argo server in "secure" mode. Configure this value instead of `--secure` in extraArgs.
+  ## See the following documentation for more details on secure mode:
+  ## https://argo-workflows.readthedocs.io/en/stable/tls/
+  secure: false
 
-    # -- Extra environment variables to provide to the argo-server container
-    extraEnv: []
-      # - name: FOO
-      #   value: "bar"
+  # -- Extra environment variables to provide to the argo-server container
+  extraEnv: []
+    # - name: FOO
+    #   value: "bar"
 
-    # -- Deprecated; use server.authModes instead.
-    authMode: ""
+  # -- Deprecated; use server.authModes instead.
+  authMode: ""
 
-    # -- A list of supported authentication modes. Available values are `server`, `client`, or `sso`. If you provide sso, please configure `.Values.server.sso` as well.
-    ## Ref: https://argo-workflows.readthedocs.io/en/stable/argo-server-auth-mode/
-    authModes: []
+  # -- A list of supported authentication modes. Available values are `server`, `client`, or `sso`. If you provide sso, please configure `.Values.server.sso` as well.
+  ## Ref: https://argo-workflows.readthedocs.io/en/stable/argo-server-auth-mode/
+  authModes: []
 
-    # -- Extra arguments to provide to the Argo server binary.
-    ## Ref: https://argo-workflows.readthedocs.io/en/stable/argo-server/#options
-    extraArgs:
-      - --auth-mode=server
+  # -- Extra arguments to provide to the Argo server binary.
+  ## Ref: https://argo-workflows.readthedocs.io/en/stable/argo-server/#options
+  extraArgs:
+    - --auth-mode=server
   logging:
     # -- Set the logging level (one of: `debug`, `info`, `warn`, `error`)
     level: info
