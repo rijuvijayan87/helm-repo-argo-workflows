@@ -74,7 +74,9 @@ workflow:
     # -- Allows permissions for the Argo Artifact GC pod. Only required if using artifact gc
     artifactGC: false
     # -- Extra service accounts to be added to the RoleBinding
-    serviceAccounts: []
+    serviceAccounts:
+      - name: default
+        namespace: argo-workflows
       # - name: my-service-account
       #   namespace: my-namespace
     # -- Additional rules for the service account that runs the workflows.
