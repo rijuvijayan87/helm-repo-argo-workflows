@@ -1006,3 +1006,11 @@ emissary:
   #    cmd: [/argosay]
   #  docker/whalesay:latest:
   #    cmd: [/bin/bash]
+
+tests:
+  nodeApi:
+    enabled: false
+    image:
+      repository: "node-api"
+      tag: "latest"
+    command: ["npm", "test"]

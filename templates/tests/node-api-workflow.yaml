@@ -1,0 +1,19 @@
+{{- if .Values.tests.nodeApi.enabled }}
+apiVersion: argoproj.io/v1alpha1
+kind: WorkflowTemplate
+metadata:
+  name: {{ .Release.Name }}-node-api-test
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app.kubernetes.io/name: {{ include "argo-workflows.name" . }}-node-api-test
+    helm.sh/chart: {{ include "argo-workflows.chart" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+spec:
+  entrypoint: run-tests
+  templates:
+  - name: run-tests
+    container:
+      image: "{{ .Values.tests.nodeApi.image.repository }}:{{ .Values.tests.nodeApi.image.tag }}"
+      command: {{ .Values.tests.nodeApi.command | toYaml | nindent 8 }}
+{{- end }}
