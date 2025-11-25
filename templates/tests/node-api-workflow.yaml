@@ -16,4 +16,7 @@ spec:
     container:
       image: "{{ .Values.tests.nodeApi.image.repository }}:{{ .Values.tests.nodeApi.image.tag }}"
       command: {{ .Values.tests.nodeApi.command | toYaml | nindent 8 }}
+      env:
+        - name: API_BASE_URL
+          value: {{ .Values.tests.nodeApi.apiBaseUrl }}
 {{- end }}

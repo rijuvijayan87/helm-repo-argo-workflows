@@ -1014,3 +1014,4 @@ tests:
       repository: rijuvijayan/node-api-container
       tag: v0.1.11
     command: ["npm", "test"]
+    apiBaseUrl: "http://node-api-node-api.node-api:3000"
