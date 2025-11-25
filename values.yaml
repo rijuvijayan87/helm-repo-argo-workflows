@@ -1012,6 +1012,6 @@ tests:
     enabled: true
     image:
       repository: rijuvijayan/node-api-container
-      tag: v0.1.13
+      tag: v0.1.15
     command: ["npm", "test"]
     apiBaseUrl: "http://node-api.node-api:3000"
