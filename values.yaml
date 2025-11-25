@@ -1012,5 +1012,5 @@ tests:
     enabled: true
     image:
       repository: rijuvijayan/node-api-container
-      tag: v0.1.8
+      tag: v0.1.10
     command: ["npm", "test"]
